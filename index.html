@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Good Night Flashcards + Stars</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to top, #1c1c1c, #333);
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: white;
+      position: relative;
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.2; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.5); }
+    }
+
+    .container {
+      z-index: 1;
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .moon {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle at 30% 30%, #fffbd5, #b3cdd1);
+      border-radius: 50%;
+      margin-bottom: 20px;
+      animation: shake 0.5s infinite alternate;
+      box-shadow: 0 0 30px #fffbd5;
+    }
+
+    @keyframes shake {
+      from { transform: rotate(-3deg); }
+      to { transform: rotate(3deg); }
+    }
+
+    .flashcard, .letter {
+      background-color: #fffb00;
+      color: #000;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 1.1em;
+      width: 300px;
+      text-align: center;
+      margin: 10px;
+      display: none;
+      animation: pop 0.5s ease;
+    }
+
+    .letter {
+      background-color: #ffffff11;
+      color: white;
+      border: 1px solid #fff;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff4081;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    .text {
+      margin-top: 30px;
+      font-size: 1.4em;
+      color: #ffc107;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Twinkling Stars Background -->
+  <div class="stars" id="stars-container"></div>
+
+  <div class="container">
+    <div class="moon"></div>
+
+    <!-- Flashcards -->
+    <div class="flashcard">Why did the pillow go to school? 😴<br><b>Because it wanted to be smarter before bed!</b></div>
+    <div class="flashcard">What do you call a fake noodle? 🍜<br><b>An impasta before bedtime!</b></div>
+    <div class="flashcard">Why don’t skeletons fight each other? ☠️<br><b>They don’t have the guts... duh!</b></div>
+
+    <!-- Final Letter -->
+    <div class="letter">
+      Cutu,<br><br>
+      I hope this helped you drift into an existential crisis.<br>
+      May your dreams be full of lame jokes<br><br>
+      🌙 Good Night Vansh! (You probably needed this) 😴<br><br>
+      — Sent with sarcasm.
+    </div>
+
+    <!-- Next Button -->
+    <button onclick="showNext()">Next 👉</button>
+
+    <div class="text">✨ End your day... one cringe at a time XD ✨</div>
+  </div>
+
+  <script>
+    const flashcards = document.querySelectorAll('.flashcard');
+    const letter = document.querySelector('.letter');
+    let index = 0;
+
+    function showNext() {
+      if (index < flashcards.length) {
+        flashcards[index].style.display = 'block';
+        index++;
+        if (index === flashcards.length) {
+          document.querySelector('button').innerText = 'Last One 😬';
+        }
+      } else if (index === flashcards.length) {
+        letter.style.display = 'block';
+        document.querySelector('button').style.display = 'none';
+      }
+    }
+
+    // Generate random stars
+    const starsContainer = document.getElementById('stars-container');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${1 + Math.random() * 2}s`;
+      star.style.animationDelay = `${Math.random() * 2}s`;
+      starsContainer.appendChild(star);
+    }
+  </script>
+
+</body>
+</html>
+
